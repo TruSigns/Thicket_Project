@@ -1,0 +1,251 @@
+.forest {
+  --ground: 64%; /* keep in sync with the third FAR_LAYERS base (0.64) */
+  position: absolute;
+  inset: 0;
+  contain: layout paint;
+}
+
+/* Sky + moon */
+.forest-sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #03070a 0%,
+    #08141a 35%,
+    #12262a 55%,
+    #1c3633 68%,
+    #0b1719 100%
+  );
+}
+
+.forest-moon {
+  position: absolute;
+  top: 13%;
+  right: 16%;
+  width: clamp(40px, 5vw, 72px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #f4f2e6 0%,
+    #d3d8c8 60%,
+    #a9b2a5 100%
+  );
+  box-shadow:
+    0 0 40px 10px rgba(220, 232, 212, 0.14),
+    0 0 140px 50px rgba(170, 200, 190, 0.07);
+  opacity: 0.85;
+}
+
+/* Canvas layers */
+.forest-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.forest-layer--back {
+  z-index: 1;
+}
+
+.forest-layer--front {
+  z-index: 4;
+}
+
+.forest-layer--flies {
+  z-index: 6;
+}
+
+/* Between-layers slot */
+.forest-mid {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.forest-title {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--ground) - 6%);
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forest-title .eyebrow {
+  margin-bottom: 1rem;
+}
+
+.forest-word {
+  margin: 0;
+  font-size: clamp(7rem, 24vw, 22rem);
+  font-weight: 200;
+  line-height: 0.8;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  color: transparent;
+  background: linear-gradient(
+    180deg,
+    rgba(205, 226, 215, 0.36) 0%,
+    rgba(205, 226, 215, 0.06) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  user-select: none;
+}
+
+/* Drifting mist: softness comes from the gradient, not a live blur filter */
+.forest-fog {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  pointer-events: none;
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(160, 192, 186, 0.12) 0%,
+    rgba(160, 192, 186, 0.05) 35%,
+    transparent 65%
+  );
+  background-size: 25% 100%;
+  background-repeat: repeat-x;
+  will-change: transform;
+  animation: forest-fog-drift 90s linear infinite;
+}
+
+.forest-fog--back {
+  z-index: 2;
+  top: calc(var(--ground) - 20%);
+  height: 26%;
+}
+
+.forest-fog--front {
+  z-index: 5;
+  bottom: -4%;
+  height: 34%;
+  opacity: 0.7;
+  animation-duration: 60s;
+  animation-direction: reverse;
+}
+
+/* Lantern */
+.forest-lantern {
+  position: absolute;
+  z-index: 2;
+  top: var(--ground);
+  left: 50%;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forest-lantern-light {
+  position: relative;
+  width: 7px;
+  height: 8px;
+  border-radius: 40% 40% 45% 45%;
+  background: #ffe6bd;
+  box-shadow:
+    0 0 6px 2px rgba(255, 205, 130, 0.95),
+    0 0 26px 10px rgba(255, 170, 80, 0.45);
+  will-change: opacity;
+  animation: forest-flicker 2.6s infinite;
+}
+
+.forest-lantern-light::before {
+  content: "";
+  position: absolute;
+  inset: -55px;
+  border-radius: 50%;
+  background: radial-gradient(rgba(255, 175, 95, 0.22), transparent 65%);
+}
+
+.forest-lantern-base {
+  width: 9px;
+  height: 3px;
+  margin-top: 1px;
+  border-radius: 1px;
+  background: #0a0f0e;
+}
+
+.forest-lantern-pool {
+  position: absolute;
+  z-index: 2;
+  top: var(--ground);
+  left: 50%;
+  width: clamp(160px, 22vw, 300px);
+  height: 46px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 180, 100, 0.22),
+    transparent 70%
+  );
+  pointer-events: none;
+  will-change: opacity;
+  animation: forest-flicker 2.6s infinite;
+}
+
+/* Vignette */
+.forest-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 85%, var(--bg) 100%),
+    radial-gradient(
+      ellipse at 50% 45%,
+      transparent 45%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+}
+
+@keyframes forest-fog-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes forest-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 0.82;
+  }
+  20% {
+    opacity: 0.96;
+  }
+  38% {
+    opacity: 0.78;
+  }
+  46% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.88;
+  }
+  82% {
+    opacity: 0.97;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forest-fog,
+  .forest-lantern-light,
+  .forest-lantern-pool {
+    animation: none;
+  }
+}
