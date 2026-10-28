@@ -1,7 +1,7 @@
 export const site = {
-  brand: "thicket",
-  name: "Your Name",
-  email: "hello@yourdomain.com",
+  brand: "Just Some Random Developer",
+  name: "Maurice Ruffin",
+  email: "Stephfan.Maurice.Ruffin@pm.me",
   resumeHref: "/resume.pdf",
   nav: [
     { label: "About", to: "/about" },
@@ -9,8 +9,11 @@ export const site = {
     { label: "Contact", to: "/contact" },
   ],
   socials: [
-    { label: "GitHub", href: "https://github.com/yourname" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/yourname" },
+    { label: "GitHub", href: "https://github.com/TruSigns" },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/maurice-ruffin-877ba6119/",
+    },
   ],
 };
 
@@ -19,8 +22,8 @@ export const site = {
 export const home = {
   seed: 42,
   eyebrow: "Software developer",
-  bigWord: "hello",
-  heading: "I'm Your Name.",
+  bigWord: "Dream",
+  heading: "Maurice Ruffin",
   copy: "I build calm, careful software, from the interface all the way down to the infrastructure.",
   primary: { label: "View projects", to: "/projects" },
   secondary: { label: "About me", to: "/about" },
