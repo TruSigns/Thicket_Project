@@ -6,9 +6,24 @@ export class ApiError extends Error {
   }
 }
 
+// Keys are sent in a header, which only allows visible ASCII
+const VALID_KEY = /^[\x21-\x7E]+$/;
+
+function assertValidKey(token) {
+  if (!VALID_KEY.test(token)) {
+    throw new ApiError(
+      400,
+      "That doesn't look like a key. Paste only the key itself: one line, no spaces or extra text.",
+    );
+  }
+}
+
 async function request(path, { method = "GET", token, body } = {}) {
   const headers = {};
-  if (token) headers.Authorization = `Bearer ${token}`;
+  if (token !== undefined) {
+    assertValidKey(token);
+    headers.Authorization = `Bearer ${token}`;
+  }
   if (body !== undefined) headers["Content-Type"] = "application/json";
 
   const res = await fetch(path, {
