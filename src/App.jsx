@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
+import Diary from "./pages/Diary";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -54,6 +55,14 @@ export default function App() {
           element={
             <WithFooter>
               <Projects />
+            </WithFooter>
+          }
+        />
+        <Route
+          path="/diary"
+          element={
+            <WithFooter>
+              <Diary />
             </WithFooter>
           }
         />

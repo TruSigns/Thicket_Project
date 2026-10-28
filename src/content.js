@@ -6,6 +6,7 @@ export const site = {
   nav: [
     { label: "About", to: "/about" },
     { label: "Projects", to: "/projects" },
+    { label: "Diary", to: "/diary" },
     { label: "Contact", to: "/contact" },
   ],
   socials: [
@@ -98,6 +99,21 @@ export const work = {
       ],
     },
   ],
+};
+
+export const diary = {
+  seed: 31,
+  eyebrow: "Campfire notes",
+  bigWord: "diary",
+  heading: "Notes from the trail.",
+  intro: "Short thoughts, small wins, and whatever's on my mind.",
+  placeholder: "What's happening on the trail?",
+  emptyMessage: "No posts yet. The campfire's still warming up.",
+  maxLength: 500, // keep in sync with MAX_LENGTH in worker/index.js
+  author: {
+    name: "Maurice Ruffin",
+    handle: "TruSigns",
+  },
 };
 
 export const contact = {

@@ -1,0 +1,341 @@
+.diary {
+  padding-top: clamp(3rem, 8vh, 5rem);
+}
+
+.diary-feed {
+  width: min(640px, 100%);
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Toolbar + unlock ---------- */
+.diary-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.diary-lock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink-faint);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.diary-lock:hover {
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.diary-lock:focus-visible,
+.post-delete:focus-visible {
+  outline: 2px solid var(--warm);
+  outline-offset: 3px;
+}
+
+.unlock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.unlock .diary-input {
+  flex: 1 1 220px;
+}
+
+.unlock .diary-error {
+  flex-basis: 100%;
+}
+
+.diary-input {
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.diary-input:focus {
+  border-color: var(--warm);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------- Avatar ---------- */
+.avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #2a4a42, #0d1a18);
+  color: var(--warm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Composer ---------- */
+.composer {
+  display: flex;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 190, 110, 0.04),
+    rgba(255, 255, 255, 0.01)
+  );
+}
+
+.composer-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.composer textarea {
+  display: block;
+  width: 100%;
+  min-height: 5.5rem;
+  padding: 0.4rem 0 0.75rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+}
+
+.composer textarea::placeholder {
+  color: var(--ink-faint);
+}
+
+.composer-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.composer-count {
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+}
+
+.composer-count.is-near {
+  color: var(--warm);
+}
+
+.composer-count.is-over {
+  color: #ff8a7a;
+}
+
+/* ---------- Feed ---------- */
+.post-list {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.post {
+  display: flex;
+  gap: 0.9rem;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--line);
+  animation: post-in 0.5s var(--ease);
+  transition: background 0.2s ease;
+}
+
+.post:last-child {
+  border-bottom: 0;
+}
+
+.post:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.post-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.post-name {
+  font-weight: 600;
+}
+
+.post-handle,
+.post-dot,
+.post-time {
+  color: var(--ink-faint);
+}
+
+.post-delete {
+  align-self: center;
+  margin-left: auto;
+  padding: 0.3rem;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--ink-faint);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    color 0.2s ease;
+}
+
+.post:hover .post-delete,
+.post-delete:focus-visible {
+  opacity: 1;
+}
+
+.post-delete:hover {
+  color: #ff8a7a;
+}
+
+.post-body {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(230, 239, 233, 0.9);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.post-body a {
+  color: var(--moss);
+  text-decoration: underline;
+  text-decoration-color: rgba(159, 196, 168, 0.4);
+  text-underline-offset: 3px;
+}
+
+.post-body a:hover {
+  color: var(--warm);
+}
+
+/* ---------- States ---------- */
+.diary-empty {
+  padding: 3rem 1.5rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: 16px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.diary-error {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: #ff8a7a;
+}
+
+.diary-error--block {
+  margin: 0 0 1rem;
+}
+
+.diary-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.post--skeleton .post-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding-top: 0.3rem;
+}
+
+.skeleton-line {
+  display: block;
+  height: 0.7rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+.skeleton-line--short {
+  width: 35%;
+}
+
+.skeleton-line--mid {
+  width: 70%;
+}
+
+@keyframes post-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (hover: none) {
+  .post-delete {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post,
+  .skeleton-line {
+    animation: none;
+  }
+}
